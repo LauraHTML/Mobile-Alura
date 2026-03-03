@@ -19,7 +19,7 @@ Nota: Você precisará ter o Node.js instalado e o aplicativo Expo Go no seu cel
 Clone o repositório:
 
 Bash
-git clone https://github.com/seu-usuario/pomodoro-alura.git
+git clone https://github.com/LauraHTML/Mobile-Alura
 Entre na pasta do projeto:
 
 Bash
