@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
 
+//componentes
+import { BotaoFoco } from "../components/botaoFoco/botaoFoco"
+
 const pomodoro = [
   {
     id: 'foco',
@@ -35,9 +38,7 @@ export default function Index() {
         {/* tabs */}
         <View style={estilos.tabs}>
           {pomodoro.map((timer) => (
-            <Pressable key={timer.id} style={tipoTimer.id === timer.id ? estilos.tabsButtonActive : null} onPress={() => setTipoTimer(timer)}>
-              <Text style={estilos.tabsText}>{timer.display}</Text>
-            </Pressable>
+            <BotaoFoco key={timer.id} timer={timer} setTimer={setTipoTimer} tipoTimer={tipoTimer} />
           ))}
         </View>
 
