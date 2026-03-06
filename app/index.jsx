@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import { BotaoFoco } from "../components/botaoFoco/botaoFoco.jsx";
+import { BotaoAcao } from "../components/botaoAcao/botaoAcao.jsx";
 
 const pomodoro = [
   {
@@ -35,18 +37,14 @@ export default function Index() {
         {/* tabs */}
         <View style={estilos.tabs}>
           {pomodoro.map((timer) => (
-            <Pressable key={timer.id} style={tipoTimer.id === timer.id ? estilos.tabsButtonActive : null} onPress={() => setTipoTimer(timer)}>
-              <Text style={estilos.tabsText}>{timer.display}</Text>
-            </Pressable>
+            <BotaoFoco key={timer.id} timer={timer} setTimer={setTipoTimer} tipoTimer={tipoTimer} />
           ))}
         </View>
 
         <Text style={estilos.timer}>
           {new Date(tipoTimer.valorInicial * 1000).toLocaleTimeString('pt-br', { minute: '2-digit', second: '2-digit' })}
         </Text>
-        <Pressable style={estilos.button}>
-          <Text style={estilos.textButton}>Iniciar</Text>
-        </Pressable>
+        <BotaoAcao display={"Iniciar"} />
       </View>
 
       <View>
@@ -84,17 +82,6 @@ const estilos = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#f59e0b",
   },
-  button: {
-    backgroundColor: "#f59e0b",
-    borderRadius: 32,
-    padding: 8
-  },
-  textButton: {
-    color: "#2b1108",
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: "center",
-  },
   footerText: {
     textAlign: "center",
     color: "#e5d9cf",
@@ -105,13 +92,4 @@ const estilos = StyleSheet.create({
     flexDirection: "row",
     gap: 10
   },
-  tabsText: {
-    padding: 8,
-    color: "#2b1108"
-  },
-  tabsButtonActive: {
-    backgroundColor: "#f59e0b",
-    borderRadius: 8,
-    fontWeight: 'bold',
-  }
 })
