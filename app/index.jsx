@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import { BotaoFoco } from "../components/botaoFoco/botaoFoco.jsx";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { BotaoAcao } from "../components/botaoAcao/botaoAcao.jsx";
+import { BotaoFoco } from "../components/botaoFoco/botaoFoco.jsx";
+import { Timer } from "../components/timer/timer.jsx";
+import { IconPause, IconPlay } from "../components/icons/icons.jsx";
 
 const pomodoro = [
   {
     id: 'foco',
-    valorInicial: '25',
+    valorInicial: 25 * 60,
     imagem: require("./tomate.jpg"),
     display: 'Foco'
   },
   {
     id: 'curto',
-    valorInicial: '5',
+    valorInicial: 5 * 60,
     imagem: require("./curto.jpg"),
     display: 'Pausa curta'
   },
   {
     id: 'longo',
-    valorInicial: '15',
+    valorInicial: 15 * 60,
     imagem: require("./longo.jpg"),
     display: 'Pausa longa'
   }
@@ -28,6 +30,46 @@ const pomodoro = [
 export default function Index() {
 
   const [tipoTimer, setTipoTimer] = useState(pomodoro[0])
+  const [timerRodando, setTimerRodando] = useState(false)
+  const [segundos, setSegundos] = useState(pomodoro[0].valorInicial)
+
+  const timerRef = useRef(null)
+
+  const limpar = () => {
+    if (timerRef.current != null) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+      setTimerRodando(false)
+    }
+  }
+
+  const toggleTipoTimer = (novoTipoTimer) => {
+    setTipoTimer(novoTipoTimer);
+    setSegundos(novoTipoTimer.valorInicial)
+    limpar()
+  }
+
+  const toggleTimer = () => {
+
+    if (timerRef.current) {
+      //pausar
+      limpar()
+      return
+    }
+
+    setTimerRodando(true)
+
+    const id = setInterval(() => {
+       setSegundos(estadoAntigo => {
+        if (estadoAntigo === 0) {
+          limpar();
+          return tipoTimer.valorInicial;
+        }
+        return estadoAntigo - 1;
+      })
+    }, 1000)
+    timerRef.current = id
+  }
 
   return (
     <View style={estilos.container}>
@@ -37,14 +79,12 @@ export default function Index() {
         {/* tabs */}
         <View style={estilos.tabs}>
           {pomodoro.map((timer) => (
-            <BotaoFoco key={timer.id} timer={timer} setTimer={setTipoTimer} tipoTimer={tipoTimer} />
+            <BotaoFoco key={timer.id} timer={timer} onPress={() => toggleTipoTimer(timer)} tipoTimer={tipoTimer} ativo={ tipoTimer.id === timer.id } />
           ))}
         </View>
 
-        <Text style={estilos.timer}>
-          {new Date(tipoTimer.valorInicial * 1000).toLocaleTimeString('pt-br', { minute: '2-digit', second: '2-digit' })}
-        </Text>
-        <BotaoAcao display={"Iniciar"} />
+        <Timer tempo={segundos} />
+        <BotaoAcao acao={timerRodando ? 'Pausar' : 'Iniciar'} onPress={toggleTimer} icone={timerRodando ? <IconPause /> : <IconPlay />} />
       </View>
 
       <View>
@@ -63,12 +103,6 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#2b1108",
     gap: 40,
-  },
-  timer: {
-    color: "#2b1108",
-    fontSize: 54,
-    fontWeight: 'bold',
-    textAlign: "center"
   },
   imagem: {
     width: 200,

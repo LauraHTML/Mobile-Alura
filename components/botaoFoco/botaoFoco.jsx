@@ -1,8 +1,9 @@
+
 import { Text, StyleSheet, Pressable } from "react-native";
 
-export const BotaoFoco = ({timer, setTimer, tipoTimer}) => {
+export const BotaoFoco = ({timer, onPress, ativo}) => {
     return(
-        <Pressable key={timer.id} style={tipoTimer.id === timer.id ? estilos.tabsButtonActive : null} onPress={() => setTimer(timer)}>
+        <Pressable key={timer.id} style={ativo ? estilos.tabsButtonActive : null} onPress={onPress}>
               <Text style={estilos.tabsText}>{timer.display}</Text>
             </Pressable>
     )
