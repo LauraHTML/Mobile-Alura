@@ -10,19 +10,19 @@ const pomodoro = [
   {
     id: 'foco',
     valorInicial: 25 * 60,
-    imagem: require("./tomate.jpg"),
+    imagem: require("./foco.png"),
     display: 'Foco'
   },
   {
     id: 'curto',
     valorInicial: 5 * 60,
-    imagem: require("./curto.jpg"),
+    imagem: require("./pausaCurta.png"),
     display: 'Pausa curta'
   },
   {
     id: 'longo',
     valorInicial: 15 * 60,
-    imagem: require("./longo.jpg"),
+    imagem: require("./pausaLonga.png"),
     display: 'Pausa longa'
   }
 ]
@@ -105,12 +105,15 @@ const estilos = StyleSheet.create({
     gap: 40,
   },
   imagem: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
+    borderRadius: 32,
+    borderWidth: 2,
+    borderColor: "#f59e0b",
   },
   actions: {
     padding: 24,
-    backgroundColor: "#db5226",
+    backgroundColor: "#80B7FF",
     width: "80%",
     borderRadius: 32,
     borderWidth: 2,

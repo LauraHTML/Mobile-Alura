@@ -21,7 +21,7 @@ const estilos = StyleSheet.create({
   },
   buttonActive: {
     backgroundColor: "#2b1108",
-    color: "#f59e0b",
+    color: "#80B7FF",
     borderRadius: 32,
     padding: 8
   },
