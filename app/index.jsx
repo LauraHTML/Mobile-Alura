@@ -1,97 +1,14 @@
+import { Link } from "expo-router";
 import { useRef, useState } from "react";
 
 import { Image, StyleSheet, Text, View } from "react-native";
-import { BotaoAcao } from "../components/botaoAcao/botaoAcao.jsx";
-import { BotaoFoco } from "../components/botaoFoco/botaoFoco.jsx";
-import { Timer } from "../components/timer/timer.jsx";
-import { IconPause, IconPlay } from "../components/icons/icons.jsx";
-
-const pomodoro = [
-  {
-    id: 'foco',
-    valorInicial: 25 * 60,
-    imagem: require("./foco.png"),
-    display: 'Foco'
-  },
-  {
-    id: 'curto',
-    valorInicial: 5 * 60,
-    imagem: require("./pausaCurta.png"),
-    display: 'Pausa curta'
-  },
-  {
-    id: 'longo',
-    valorInicial: 15 * 60,
-    imagem: require("./pausaLonga.png"),
-    display: 'Pausa longa'
-  }
-]
 
 export default function Index() {
 
-  const [tipoTimer, setTipoTimer] = useState(pomodoro[0])
-  const [timerRodando, setTimerRodando] = useState(false)
-  const [segundos, setSegundos] = useState(pomodoro[0].valorInicial)
-
-  const timerRef = useRef(null)
-
-  const limpar = () => {
-    if (timerRef.current != null) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-      setTimerRodando(false)
-    }
-  }
-
-  const toggleTipoTimer = (novoTipoTimer) => {
-    setTipoTimer(novoTipoTimer);
-    setSegundos(novoTipoTimer.valorInicial)
-    limpar()
-  }
-
-  const toggleTimer = () => {
-
-    if (timerRef.current) {
-      //pausar
-      limpar()
-      return
-    }
-
-    setTimerRodando(true)
-
-    const id = setInterval(() => {
-       setSegundos(estadoAntigo => {
-        if (estadoAntigo === 0) {
-          limpar();
-          return tipoTimer.valorInicial;
-        }
-        return estadoAntigo - 1;
-      })
-    }, 1000)
-    timerRef.current = id
-  }
-
   return (
-    <View style={estilos.container}>
-      <Image style={estilos.imagem} source={tipoTimer.imagem} />
-
-      <View style={estilos.actions}>
-        {/* tabs */}
-        <View style={estilos.tabs}>
-          {pomodoro.map((timer) => (
-            <BotaoFoco key={timer.id} timer={timer} onPress={() => toggleTipoTimer(timer)} tipoTimer={tipoTimer} ativo={ tipoTimer.id === timer.id } />
-          ))}
-        </View>
-
-        <Timer tempo={segundos} />
-        <BotaoAcao acao={timerRodando ? 'Pausar' : 'Iniciar'} onPress={toggleTimer} icone={timerRodando ? <IconPause /> : <IconPlay />} />
-      </View>
-
-      <View>
-        <Text style={estilos.footerText}>
-          Projeto fictício e sem fins comerciais
-        </Text>
-      </View>
+    <View>
+      <Text>Inicio</Text>
+      <Link href={{pathname: "/pomodoro"}}>Quero iniciar</Link>
     </View>
   );
 }
