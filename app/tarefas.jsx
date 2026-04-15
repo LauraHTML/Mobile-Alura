@@ -1,17 +1,18 @@
-import { Link } from "expo-router";
-
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ItemTarefa } from "../components/ItemTarefa/itemTarefa.jsx";
+import { BotaoAcao } from "../components/botaoAcao/botaoAcao.jsx";
+import { IconeLapis } from "../components/icons/icons.jsx";
 
 export default function Index() {
   return (
     <View style={estilos.container}>
-      <View>
-        <Text>Página para listar tarefas</Text>
-        <ItemTarefa tituloTarefa={"Estudar react native"} />
+      <Text style={estilos.texto}>Página para listar tarefas</Text>
+      <View style={estilos.listaTarefas}>
+        <ItemTarefa completada={true} tituloTarefa={"Estudar react native"} />
         <ItemTarefa tituloTarefa={"Aprender LOP"} />
+        <ItemTarefa tituloTarefa={"Aprender react"} />
       </View>
-
+      <BotaoAcao acao={'Adicionar tarefa'} icone={<IconeLapis/>}  />
     </View>
   );
 }
@@ -19,15 +20,19 @@ export default function Index() {
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
+    height: 100,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#80B7FF",
-    gap: 10,
-    color: "#e5d9cf",
+    backgroundColor: "#2b1108",
+    gap: 20,
   },
-  containerIndex:{
+  texto:{
+    color: "white",
+    textAlign: "center",
+    fontSize: 26,
+  },
+  listaTarefas:{
     fontSize: 20,
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     gap: 10,

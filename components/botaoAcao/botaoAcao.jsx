@@ -1,23 +1,23 @@
-import { Text, StyleSheet, Pressable } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-export const BotaoAcao = ({acao, onPress, icone}) => {
-    return(
-         <Pressable style={estilos.button} onPress={onPress}>
-          {icone}
-          <Text style={estilos.textButton}>{acao}</Text>
-        </Pressable>
-    )
+export const BotaoAcao = ({ acao, onPress, icone }) => {
+  return (
+    <Pressable style={estilos.button} onPress={onPress}>
+      {icone}
+      <Text style={estilos.textButton}>{acao}</Text>
+    </Pressable>
+  )
 }
 
 const estilos = StyleSheet.create({
   button: {
     backgroundColor: "#f59e0b",
     borderRadius: 32,
-    padding: 8,
+    padding: 16,
     flexDirection: 'row',
     gap: 12,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonActive: {
     backgroundColor: "#2b1108",
