@@ -1,8 +1,7 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ProvedorTarefas } from "../components/context/taskProvider.jsx"
-
+import { ProvedorTarefas } from '../components/context/taskProvider';
 
 export default function Layout() {
   return (

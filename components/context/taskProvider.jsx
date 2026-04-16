@@ -1,13 +1,13 @@
 import { createContext, useState } from "react";
 
-export const ContextoTarefas = createContext()
-
+export const ContextoTarefa = createContext()
 
 export function ProvedorTarefas({ children }) {
 
     const [tarefas, setTarefas] = useState([]);
 
     const adicionarTarefa = (descricao) => {
+        console.log('tarefa vai ser adicionada')
         setTarefas(oldState => {
             return [
                 ...oldState,
@@ -38,13 +38,13 @@ export function ProvedorTarefas({ children }) {
     }
 
     return (
-        <ContextoTarefas.Provider value={{
+        <ContextoTarefa.Provider value={{
             tarefas,
             adicionarTarefa,
             alternarTarefa,
             deletarTarefa
         }}>
             {children}
-        </ContextoTarefas.Provider>
+        </ContextoTarefa.Provider>
     )
 }

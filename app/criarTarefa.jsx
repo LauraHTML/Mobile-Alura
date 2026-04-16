@@ -1,32 +1,46 @@
-import { KeyboardAvoidingView, Text, View, TextInput, Pressable, StyleSheet, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { useState } from "react";
+import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import useContextoTarefa from "../components/context/useTaskProvider";
 
-export default function AddTask() {
+export default function AdicionarTarefa() {
+    const { adicionarTarefa } = useContextoTarefa()
+    const [descricao, setDescricao] = useState('');
+
+    const criarTarefa = () => {
+        if (descricao.trim() == '') {
+            return
+        }
+        adicionarTarefa(descricao)
+        setDescricao('')
+    }
+
     return (<KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.inner}>
-                <Text style={styles.texto}>
-                    Adicionar uma tarefa:
-                </Text>
-                <Text style={styles.label}>
-                    Em que você está trabalhando?
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    numberOfLines={10}
-                    multiline={true}
-                />
-                <View style={styles.acao}>
-                    <Pressable style={styles.botao}>
-                        <Text>
-                            Salvar
-                        </Text>
-                    </Pressable>
-                </View>
+        <View style={styles.inner}>
+            <Text style={styles.texto}>
+                Adicionar uma tarefa:
+            </Text>
+            <Text style={styles.label}>
+                Em que você está trabalhando?
+            </Text>
+            <TextInput
+                placeholder="Descreva aqui a sua tarefa"
+                style={styles.input}
+                numberOfLines={10}
+                multiline={true}
+                value={descricao}
+                onChangeText={setDescricao}
+            />
+            <View style={styles.acao}>
+                <Pressable style={styles.botao} onPress={criarTarefa}>
+                    <Text>
+                        Salvar
+                    </Text>
+                </Pressable>
             </View>
-        </TouchableWithoutFeedback>
+        </View>
     </KeyboardAvoidingView>)
 }
 
