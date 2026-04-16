@@ -7,7 +7,7 @@ export default function AddTask() {
     >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.inner}>
-                <Text style={styles.text}>
+                <Text style={styles.texto}>
                     Adicionar uma tarefa:
                 </Text>
                 <Text style={styles.label}>
@@ -18,8 +18,8 @@ export default function AddTask() {
                     numberOfLines={10}
                     multiline={true}
                 />
-                <View style={styles.actions}>
-                    <Pressable style={styles.button}>
+                <View style={styles.acao}>
+                    <Pressable style={styles.botao}>
                         <Text>
                             Salvar
                         </Text>
@@ -33,17 +33,17 @@ export default function AddTask() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#021123',
+        backgroundColor: '#2b1108',
         gap: 16,
         alignItems: 'center'
     },
-    text: {
+    texto: {
         color: '#FFF',
         textAlign: 'center',
         fontSize: 26
     },
     inner: {
-        backgroundColor: '#98A0A8',
+        backgroundColor: '#80B7FF',
         width: '90%',
         borderRadius: 8,
         padding: 16,
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         height: 100
     },
-    button: {
+    botao: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 4
     },
-    actions: {
+    acao: {
         flexDirection: 'row',
         justifyContent: 'flex-end'
     }

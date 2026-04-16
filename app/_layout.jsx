@@ -1,10 +1,13 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ProvedorTarefas } from "../components/context/taskProvider.jsx"
+
 
 export default function Layout() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ProvedorTarefas>
+      <SafeAreaView style={{ flex: 1 }}>
       <NativeTabs
         style={{ flex: 1 }}
       >
@@ -26,5 +29,6 @@ export default function Layout() {
         </NativeTabs.Trigger>
       </NativeTabs>
     </SafeAreaView>
+    </ProvedorTarefas>
   )
 }
