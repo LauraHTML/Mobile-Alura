@@ -7,16 +7,10 @@ export function ProvedorTarefas({ children }) {
     const [tarefas, setTarefas] = useState([]);
 
     const adicionarTarefa = (descricao) => {
-        console.log('tarefa vai ser adicionada')
-        setTarefas(oldState => {
-            return [
-                ...oldState,
-                {
-                    descricao,
-                    id: oldState.length + 1
-                }
-            ]
-        })
+        console.log('tarefa vai ser adicionada');
+        if (!descricao) return;
+        const novaTarefa = { descricao };
+        setTarefas([...tarefas, novaTarefa, {id: tarefas.length + 1}]);
     }
 
     const alternarTarefa = (id) => {

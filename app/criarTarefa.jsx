@@ -3,16 +3,18 @@ import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput,
 import useContextoTarefa from "../components/context/useTaskProvider";
 
 export default function AdicionarTarefa() {
-    const { adicionarTarefa } = useContextoTarefa()
+    const { adicionarTarefa } = useContextoTarefa();
     const [descricao, setDescricao] = useState('');
 
     const criarTarefa = () => {
         if (descricao.trim() == '') {
             return
         }
-        adicionarTarefa(descricao)
-        setDescricao('')
+        adicionarTarefa(descricao);
+        setDescricao('');
     }
+    //  
+    console.log(descricao)
 
     return (<KeyboardAvoidingView
         style={styles.container}
