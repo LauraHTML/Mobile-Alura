@@ -6,7 +6,7 @@ import { IconeFinalizado } from "../icons/icons.jsx";
 import { IconeLapis } from "../icons/icons.jsx";
 import { IconeLixeira } from "../icons/icons.jsx";
 
-export const ItemTarefa = ({descricao, completada}) => {
+export const ItemTarefa = ({descricao, completar, deletar, completada}) => {
     const estilosItemTarefa = [estilos.tarefaItem]
 
     if (completada){
@@ -16,8 +16,8 @@ export const ItemTarefa = ({descricao, completada}) => {
         <View style={estilosItemTarefa}>
             <BotaoTarefa completada={completada} icone={<IconeFinalizado />} />
             <Text style={estilos.tarefaTexto}>{descricao}</Text>
-            <BotaoTarefa completada={completada} icone={<IconeLapis />} />
-            <BotaoTarefa completada={completada} icone={<IconeLixeira />} />
+            <BotaoTarefa onPress={completar} icone={<IconeLapis />} />
+            <BotaoTarefa onPress={deletar} icone={<IconeLixeira />} />
         </View>
     )
 }
@@ -32,6 +32,7 @@ const estilos = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderRadius: 4,
     width: 300,
+    marginTop: 16,
     },
 
     tarefaConcluida:{

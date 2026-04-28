@@ -1,25 +1,36 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { ItemTarefa } from "../components/ItemTarefa/itemTarefa.jsx";
 import { BotaoAcao } from "../components/botaoAcao/botaoAcao.jsx";
+import { router } from "expo-router";
+
+import useContextoTarefa from "../components/context/useTaskProvider.js";
+
 import { IconeLapis } from "../components/icons/icons.jsx";
-import useContextoTarefa from "../components/context/useTaskProvider";
 
-export default function Index() {
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
+export default function Tarefas() {
+  const { deletarTarefa, alternarTarefa} = useContextoTarefa();
   const { tarefas } = useContextoTarefa();
 
   return (
-    <View style={estilos.container}>
-      <Text style={estilos.texto}>Página para listar tarefas</Text>
-      <View style={estilos.listaTarefas}>
-          <FlatList
-          data={tarefas}
-          renderItem={({tarefa}) => <ItemTarefa tituloTarefa={tarefa.descricao} completada={tarefa.completada} />}
-          keyExtractor={tarefa => tarefa.id}
-          />
-      </View>
-      <BotaoAcao acao={'Adicionar tarefa'} icone={<IconeLapis/>}  />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={estilos.container}>
+        <View>
+          <View style={estilos.listaTarefas}>
+            <FlatList
+              data={tarefas}
+              renderItem={({ item }) => <ItemTarefa descricao={item.descricao} completada={item.completada} deletar={() => deletarTarefa(item.id)} completar={() => alternarTarefa(item.id)} />}
+              keyExtractor={item => item.id}
+              ItemSeparatorComponent={() => <View style={{ height: 8 }}></View>}
+              ListHeaderComponent={<Text style={estilos.texto}>Lista de tarefas</Text>}
+              ListFooterComponent={<BotaoAcao acao={'Adicionar tarefa'} icone={<IconeLapis />} onPress={() => router.navigate('criarTarefa')} />}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
+
   );
 }
 
@@ -31,16 +42,19 @@ const estilos = StyleSheet.create({
     backgroundColor: "#2b1108",
     gap: 20,
   },
-  texto:{
+  texto: {
     color: "white",
     textAlign: "center",
     fontSize: 26,
+    marginBottom: 26,
+    marginTop: 26,
   },
-  listaTarefas:{
+  listaTarefas: {
     fontSize: 20,
     justifyContent: "center",
     alignItems: "center",
     gap: 10,
     color: "#e5d9cf",
+    paddingHorizontal: 10,
   }
 })

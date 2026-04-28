@@ -1,17 +1,19 @@
+import { router } from "expo-router";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import useContextoTarefa from "../components/context/useTaskProvider";
 
-export default function AdicionarTarefa() {
+export default function CriarTarefa() {
     const { adicionarTarefa } = useContextoTarefa();
     const [descricao, setDescricao] = useState('');
 
     const criarTarefa = () => {
-        if (descricao.trim() == '') {
+        if (!descricao) {
             return
         }
         adicionarTarefa(descricao);
         setDescricao('');
+        // router.navigate('/tarefas');
     }
     //  
     console.log(descricao)
