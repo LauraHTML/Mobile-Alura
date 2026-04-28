@@ -1,19 +1,24 @@
 import { router } from "expo-router";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import useContextoTarefa from "../components/context/useTaskProvider";
+import useContextoTarefa from "../../components/context/useTaskProvider";
 
-export default function CriarTarefa() {
-    const { adicionarTarefa } = useContextoTarefa();
+import { useLocalSearchParams } from "expo-router";
+
+export default function EditarTarefa() {
+    const {id} = useLocalSearchParams()
+
+    const { atualizarTarefa } = useContextoTarefa();
     const [descricao, setDescricao] = useState('');
 
-    const criarTarefa = () => {
+    const atualizarTarefaSelecionada = () => {
         if (!descricao) {
             return
         }
-        adicionarTarefa(descricao);
+        atualizarTarefa(descricao, id);
         setDescricao('');
-    }  
+        router.navigate('/tarefas');
+    }
 
     return (<KeyboardAvoidingView
         style={styles.container}
@@ -21,8 +26,8 @@ export default function CriarTarefa() {
     >
         <View style={styles.inner}>
             <Text style={styles.texto}>
-                Adicionar uma tarefa:
-            </Text>
+                Editar tarefa:
+            </Text> 
             <Text style={styles.label}>
                 Em que você está trabalhando?
             </Text>
@@ -35,7 +40,7 @@ export default function CriarTarefa() {
                 onChangeText={setDescricao}
             />
             <View style={styles.acao}>
-                <Pressable style={styles.botao} onPress={criarTarefa}>
+                <Pressable style={styles.botao} onPress={atualizarTarefaSelecionada}>
                     <Text>
                         Salvar
                     </Text>

@@ -28,21 +28,31 @@ export function ProvedorTarefas({ children }) {
         const getData = async () => {
             try {
                 const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
-                const tarefasCarregadas = jsonValue != null ? JSON.parse(jsonValue) : null;
+                const tarefasCarregadas = jsonValue != null ? JSON.parse(jsonValue) : [];
                 setTarefas(tarefasCarregadas)
                 setCarregado(true)
             } catch (e) {
                 console.error('Não foi possível acessar tarefas')
             }
         };
-        
+        getData()
     }, [])
 
     const adicionarTarefa = (descricao) => {
-        console.log('tarefa vai ser adicionada');
         if (!descricao) return;
         const novaTarefa = { descricao, id: tarefas.length + 1 };
         setTarefas([...tarefas, novaTarefa]);
+    }
+
+    const atualizarTarefa = (descricao, id) => {
+        console.log('autalizar tarefa')
+        if (!descricao) return;
+        const tarefaAtualizada = { descricao, id: tarefas.length + 1 };
+        setTarefas([...tarefas, tarefaAtualizada]);
+
+        setTarefas(oldState => {
+            return oldState.filter(tarefa => tarefa.id != id)
+        })
     }
 
     const alternarTarefa = (id) => {
@@ -68,6 +78,7 @@ export function ProvedorTarefas({ children }) {
             tarefas,
             adicionarTarefa,
             alternarTarefa,
+            atualizarTarefa,
             deletarTarefa
         }}>
             {children}

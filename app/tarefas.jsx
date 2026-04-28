@@ -20,7 +20,7 @@ export default function Tarefas() {
           <View style={estilos.listaTarefas}>
             <FlatList
               data={tarefas}
-              renderItem={({ item }) => <ItemTarefa descricao={item.descricao} completada={item.completada} deletar={() => deletarTarefa(item.id)} completar={() => alternarTarefa(item.id)} />}
+              renderItem={({ item }) => <ItemTarefa descricao={item.descricao} completada={item.completada} editar={() => router.navigate(`/editarTarefa/${item.id}`)} deletar={() => deletarTarefa(item.id)} completar={() => alternarTarefa(item.id)} />}
               keyExtractor={item => item.id}
               ItemSeparatorComponent={() => <View style={{ height: 8 }}></View>}
               ListHeaderComponent={<Text style={estilos.texto}>Lista de tarefas</Text>}
@@ -46,7 +46,6 @@ const estilos = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 26,
-    marginBottom: 26,
     marginTop: 26,
   },
   listaTarefas: {

@@ -18,6 +18,7 @@ const estilos = StyleSheet.create({
     gap: 12,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 26
   },
   buttonActive: {
     backgroundColor: "#2b1108",
