@@ -23,7 +23,7 @@ const estilos = StyleSheet.create({
   },
   tabsText: {
     padding: 8,
-    color: "#2b1108"
+    color: "#fff"
   },
   tabsButtonActive: {
     backgroundColor: "#f59e0b",

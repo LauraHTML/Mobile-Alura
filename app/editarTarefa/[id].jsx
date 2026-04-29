@@ -6,17 +6,17 @@ import useContextoTarefa from "../../components/context/useTaskProvider";
 import { useLocalSearchParams } from "expo-router";
 
 export default function EditarTarefa() {
-    const {id} = useLocalSearchParams()
+    const { id } = useLocalSearchParams()
 
     const { atualizarTarefa } = useContextoTarefa();
-    const [descricao, setDescricao] = useState('');
+    const [novaDescricao, setNovaDescricao] = useState('');
 
     const atualizarTarefaSelecionada = () => {
-        if (!descricao) {
+        if (!novaDescricao) {
             return
         }
-        atualizarTarefa(descricao, id);
-        setDescricao('');
+        atualizarTarefa(novaDescricao, Number(id));
+        setNovaDescricao('');
         router.navigate('/tarefas');
     }
 
@@ -26,8 +26,8 @@ export default function EditarTarefa() {
     >
         <View style={styles.inner}>
             <Text style={styles.texto}>
-                Editar tarefa:
-            </Text> 
+                Editar tarefa: {id}
+            </Text>
             <Text style={styles.label}>
                 Em que você está trabalhando?
             </Text>
@@ -36,8 +36,8 @@ export default function EditarTarefa() {
                 style={styles.input}
                 numberOfLines={10}
                 multiline={true}
-                value={descricao}
-                onChangeText={setDescricao}
+                value={novaDescricao}
+                onChangeText={setNovaDescricao}
             />
             <View style={styles.acao}>
                 <Pressable style={styles.botao} onPress={atualizarTarefaSelecionada}>

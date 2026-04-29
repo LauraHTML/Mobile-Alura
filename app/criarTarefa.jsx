@@ -20,10 +20,10 @@ export default function CriarTarefa() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
         <View style={styles.inner}>
-            <Text style={styles.texto}>
+            <Text style={styles.titulo}>
                 Adicionar uma tarefa:
             </Text>
-            <Text style={styles.label}>
+            <Text style={styles.subtitulo}>
                 Em que você está trabalhando?
             </Text>
             <TextInput
@@ -52,10 +52,15 @@ const styles = StyleSheet.create({
         gap: 16,
         alignItems: 'center'
     },
-    texto: {
+    titulo: {
         color: '#FFF',
         textAlign: 'center',
         fontSize: 26
+    },
+    subtitulo: {
+        color: '#FFF',
+        textAlign: 'center',
+        fontSize: 18
     },
     inner: {
         backgroundColor: '#80B7FF',

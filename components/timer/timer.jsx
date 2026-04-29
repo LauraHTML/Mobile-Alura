@@ -14,7 +14,7 @@ export const Timer = ({tempo}) => {
 
 const estilos = StyleSheet.create({
  timer: {
-    color: "#2b1108",
+    color: "#fff",
     fontSize: 54,
     fontWeight: 'bold',
     textAlign: "center"

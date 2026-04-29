@@ -108,11 +108,9 @@ const estilos = StyleSheet.create({
   },
   actions: {
     padding: 24,
-    backgroundColor: "#80B7FF",
     width: "80%",
     borderRadius: 32,
-    borderWidth: 2,
-    borderColor: "#f59e0b",
+    color: "#e5d9cf"
   },
   footerText: {
     textAlign: "center",

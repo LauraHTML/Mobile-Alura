@@ -47,12 +47,14 @@ export function ProvedorTarefas({ children }) {
     const atualizarTarefa = (descricao, id) => {
         console.log('autalizar tarefa')
         if (!descricao) return;
-        const tarefaAtualizada = { descricao, id: tarefas.length + 1 };
-        setTarefas([...tarefas, tarefaAtualizada]);
-
         setTarefas(oldState => {
-            return oldState.filter(tarefa => tarefa.id != id)
-        })
+            return oldState.map(tarefa => {
+                if (tarefa.id === id) {
+                    return { ...tarefa, descricao };
+                }
+                return tarefa;
+            });
+        });
     }
 
     const alternarTarefa = (id) => {

@@ -43,9 +43,9 @@ function IconEdit({ color, size }) {
   );
 }
 
-const ACTIVE_COLOR = '#6C63FF';
+const ACTIVE_COLOR = '#2f9c65';
 const INACTIVE_COLOR = '#9E9E9E';
-const TAB_BAR_BG = '#FFFFFF';
+const TAB_BAR_BG = '#2b1108';
 
 export default function TabLayout() {
   return (
@@ -122,16 +122,10 @@ export default function TabLayout() {
           }}
         />
 
-        {/* 
-          A rota editarTarefa/[id] é uma rota dinâmica e normalmente
-          NÃO deve aparecer na navbar. Ela é acessada via navegação
-          programática (router.push) a partir da lista de tarefas.
-          Por isso, usamos tabBarItemStyle com display:'none' para ocultá-la.
-        */}
         <Tabs.Screen
           name="editarTarefa/[id]"
           options={{
-            href: null, // Remove da navbar completamente
+            href: null,
             title: 'Editar',
           }}
         />
@@ -188,14 +182,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: -18,
-    shadowColor: '#6C63FF',
+    shadowColor: ACTIVE_COLOR,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 8,
   },
   createButtonActive: {
-    backgroundColor: '#6C63FF',
+    backgroundColor: ACTIVE_COLOR,
   },
 
   // Ícone: Lista
